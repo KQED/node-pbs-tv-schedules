@@ -1,0 +1,1 @@
+var PBSTvSchedules = module.exports = require('./lib/node-pbs-tv-schedules');
