@@ -14,3 +14,27 @@ Some tests require an api_key. Some don't
 $ export PBS_API_KEY='WHATEVER_IT_IS'
 $ npm test
 ```
+
+### Usage
+```
+PBSTvSchedules = require('node-pbs-tv-schedules');
+var options = {};
+options.api_key = 'YOUR_API_KEY';
+
+pbsAPI = new PBSTvSchedules(options);
+var zip = 94110;
+
+// Promises example
+pbsAPI.get_stations_by_zip(zip)
+.then(function (stations){
+    pbsAPI.logger.info("get_stations_by_zip", stations);
+}, function(err){
+    console.error(err);
+});
+
+// Async example
+pbsAPI.get_stations_by_zip_async(zip, function(err, stations){
+    var logger = pbsAPI.logger;
+    logger.info("get_stations_by_zip", stations);
+});
+```
