@@ -1,4 +1,5 @@
 var demand  = require('must'),
+    assert  = require('assert'),
     PBSTvSchedules = require('./../lib/node-pbs-tv-schedules');
 
 var testzip_good = 94110,
@@ -21,6 +22,8 @@ describe("PBSApi", function(){
     });
 
     it("should get a list of callsigns for zip " + testzip_good + " (promises)", function(finished){
+        this.timeout(3000);
+
         var testzip = 94110;
         PBSApi.get_stations_by_zip(testzip_good)
         .then(function(results){
@@ -34,17 +37,19 @@ describe("PBSApi", function(){
     // **************** These fail without API KEY
     if (PBSApi.api_key) {
         it("should get a list of shows for a callsign (async)", function(finished){
+            this.timeout(3000);
             var program_id = 3190;
             var callsign = "KQED";
 
             PBSApi.get_upcoming_programs_by_callsign_async(program_id, callsign, function(err, results){
-                demand(err).be.null();
+                demand(err).be.null("ERROR: " + err);
                 results.must.be.an.array();
                 finished();
             });
         });
 
         it("should get a list of shows for a callsign (promises)", function(finished){
+            this.timeout(3000);
             var program_id = 3190;
             var callsign = "KQED";
             PBSApi.get_upcoming_programs_by_callsign(program_id, callsign)
@@ -56,6 +61,7 @@ describe("PBSApi", function(){
         });
     } else {
         it("Can't run some tests because of lack of api_key", function (finished) {
+            assert(false, 'Missing api_key. Use: export PBS_API_KEY="KEY"');
             finished();
         });
     }
