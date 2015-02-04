@@ -8,6 +8,7 @@ var testzip_good = 94110,
 var PBSApi = new PBSTvSchedules();
 var api_key = process.env.PBS_API_KEY || null;
 PBSApi.set_api_key(api_key);
+console.log("PBSApi.set_api_key(api_key);", api_key);
 describe("PBSApi", function(){
     it("must be creatable", function(){
         PBSApi.must.be.an.instanceof(PBSTvSchedules);
