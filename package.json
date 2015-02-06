@@ -1,6 +1,6 @@
 {
   "name": "node-pbs-tv-schedules",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node module implementing the PBS TV Schedules V2 and Locator APIs. See https://projects.pbs.org/confluence/display/tvsapi/TV+Schedules+Version+2 and https://projects.pbs.org/confluence/display/localization/Locator",
   "main": "index.js",
   "scripts": {
