@@ -6,7 +6,7 @@ var testzip_good = 94110,
     testzip_bad = 11111;
 
 var PBSApi = new PBSTvSchedules();
-var api_key = process.env.PBS_API_KEY || null;
+var api_key = process.env.PBS_TV_SCHEDULES_API_KEY || null;
 PBSApi.set_api_key(api_key);
 console.log("PBSApi.set_api_key(api_key);", api_key);
 describe("PBSApi", function(){
@@ -62,7 +62,7 @@ describe("PBSApi", function(){
         });
     } else {
         it("Can't run some tests because of lack of api_key", function (finished) {
-            assert(false, 'Missing api_key. Use: export PBS_API_KEY="KEY"');
+            assert(false, 'Missing api_key. Use: export PBS_TV_SCHEDULES_API_KEY="KEY"');
             finished();
         });
     }

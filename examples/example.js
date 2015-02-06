@@ -1,7 +1,7 @@
 var PBSTvSchedules = require('../'),
     options = {};
 
-options.api_key =  process.env.PBS_API_KEY || null;
+options.api_key =  process.env.PBS_TV_SCHEDULES_API_KEY || null;
 
 var pbsAPI = new PBSTvSchedules(options);
 var zip = 94110;
