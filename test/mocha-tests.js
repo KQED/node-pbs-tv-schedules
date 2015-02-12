@@ -43,10 +43,10 @@ describe("PBSApi", function(){
             var callsign = "KQED",
                 lc_callsign = callsign.toLowerCase();
 
-            PBSApi.get_upcoming_programs_by_callsign_async(program_id, callsign, function(err, results){
+            PBSApi.get_upcoming_by_callsign_program_id_async(program_id, callsign, function(err, results){
                 demand(err).be.null("ERROR: " + err);
                 results.must.be.an.object();
-                results.must.have.keys([lc_callsign]);
+                results.upcoming_episodes.must.be.an.array();
                 finished();
             });
         });
@@ -56,10 +56,10 @@ describe("PBSApi", function(){
             var program_id = 3190;
             var callsign = "KQED",
                 lc_callsign = callsign.toLowerCase();
-            PBSApi.get_upcoming_programs_by_callsign(program_id, callsign)
+            PBSApi.get_upcoming_by_callsign_program_id(program_id, callsign)
             .then(function(results){
                 results.must.be.an.object();
-                results.must.have.keys([lc_callsign]);
+                results.upcoming_episodes.must.be.an.array();
                 finished();
             })
             .done();
