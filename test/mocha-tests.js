@@ -10,7 +10,7 @@ var api_key = process.env.PBS_TV_SCHEDULES_API_KEY || null;
 PBSApi.set_api_key(api_key);
 console.log("PBSApi.set_api_key(api_key);", api_key);
 describe("PBSApi", function(){
-    this.timeout(7000); // The PBS API is slow.
+    this.timeout(10000); // The PBS API is slow.
 
     it("must be creatable", function(){
         PBSApi.must.be.an.instanceof(PBSTvSchedules);
@@ -58,6 +58,28 @@ describe("PBSApi", function(){
         });
     });
 
+    var fail_test_ip = '127.0.0.1';
+    it ("should faill to get a zip code for ip address " + fail_test_ip + " (async)", function(finished){
+        PBSApi.get_zip_from_ip_async(fail_test_ip, function(err, results){
+            err.must.be(404);
+            demand(results).be.undefined();
+            finished();
+        });
+    });
+
+    it ("should faill to get a zip code for ip address " + fail_test_ip + " (promises)", function(finished){
+        PBSApi.get_zip_from_ip(fail_test_ip)
+        .then(function(results){
+            demand(results).be.undefined();
+        })
+        .fail(function(err){
+            err.must.be(404);
+            finished();
+        })
+        .done();
+    });
+
+
     // **************** These fail without API KEY
     if (PBSApi.api_key) {
         it("should get a list of shows for a callsign (async)", function(finished){
@@ -85,6 +107,7 @@ describe("PBSApi", function(){
             })
             .done();
         });
+
     } else {
         it("Can't run some tests because of lack of api_key", function (finished) {
             assert(false, 'Missing api_key. Use: export PBS_TV_SCHEDULES_API_KEY="KEY"');
