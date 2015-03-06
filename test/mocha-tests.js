@@ -59,7 +59,7 @@ describe("PBSApi", function(){
     });
 
     var fail_test_ip = '127.0.0.1';
-    it ("should faill to get a zip code for ip address " + fail_test_ip + " (async)", function(finished){
+    it ("should fail to get a zip code for ip address " + fail_test_ip + " (async)", function(finished){
         PBSApi.get_zip_from_ip_async(fail_test_ip, function(err, results){
             err.must.be(404);
             demand(results).be.undefined();
@@ -67,7 +67,7 @@ describe("PBSApi", function(){
         });
     });
 
-    it ("should faill to get a zip code for ip address " + fail_test_ip + " (promises)", function(finished){
+    it ("should fail to get a zip code for ip address " + fail_test_ip + " (promises)", function(finished){
         PBSApi.get_zip_from_ip(fail_test_ip)
         .then(function(results){
             demand(results).be.undefined();
@@ -79,15 +79,14 @@ describe("PBSApi", function(){
         .done();
     });
 
-
-    // **************** These fail without API KEY
+    // *** These tests fail without PBS_TV_SCHEDULES_API_KEY environment variable being set
     if (PBSApi.api_key) {
         it("should get a list of shows for a callsign (async)", function(finished){
             var program_id = 3190;
             var callsign = "KQED",
                 lc_callsign = callsign.toLowerCase();
 
-            PBSApi.get_upcoming_by_callsign_program_id_async(program_id, callsign, function(err, results){
+            PBSApi.get_upcoming_by_callsign_program_id_async(callsign, program_id, function(err, results){
                 demand(err).be.null("ERROR: " + err);
                 results.must.be.an.object();
                 results.upcoming_episodes.must.be.an.array();
@@ -99,7 +98,7 @@ describe("PBSApi", function(){
             var program_id = 3190;
             var callsign = "KQED",
                 lc_callsign = callsign.toLowerCase();
-            PBSApi.get_upcoming_by_callsign_program_id(program_id, callsign)
+            PBSApi.get_upcoming_by_callsign_program_id(callsign, program_id)
             .then(function(results){
                 results.must.be.an.object();
                 results.upcoming_episodes.must.be.an.array();
