@@ -9,6 +9,10 @@ A node module implementing the [PBS TV Schedules API](https://projects.pbs.org/c
 
 ## Install
 ```
+$ npm install node-pbs-tv-schedules
+```
+Or
+```
 $ git clone git@github.com:KQED/node-pbs-tv-schedules.git
 $ cd node-pbs-tv-schedules
 $ npm install
