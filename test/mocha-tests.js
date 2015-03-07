@@ -72,7 +72,7 @@ describe("PBSApi", function(){
         .then(function(results){
             demand(results).be.undefined();
         })
-        .fail(function(err){
+        .catch(function(err){
             err.must.be(404);
             finished();
         })
