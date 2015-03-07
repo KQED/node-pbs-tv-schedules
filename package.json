@@ -1,8 +1,9 @@
 {
   "name": "node-pbs-tv-schedules",
-  "version": "0.0.5",
-  "description": "Node module implementing the PBS TV Schedules V2 and Locator APIs. See https://projects.pbs.org/confluence/display/tvsapi/TV+Schedules+Version+2 and https://projects.pbs.org/confluence/display/localization/Locator",
+  "version": "0.0.6",
+  "description": "Node module implementing the PBS TV Schedules V2 and Locator APIs",
   "main": "index.js",
+  "repository" : "https://github.com/KQED/node-pbs-tv-schedules",
   "scripts": {
     "example": "node examples/example.js | ./node_modules/.bin/bunyan -o short",
     "test": "./node_modules/.bin/mocha test/*.js"
