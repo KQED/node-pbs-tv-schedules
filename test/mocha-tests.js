@@ -9,7 +9,7 @@ var PBSApi = new PBSTvSchedules();
 var api_key = process.env.PBS_TV_SCHEDULES_API_KEY || null;
 PBSApi.set_api_key(api_key);
 console.log("PBSApi.set_api_key(api_key);", api_key);
-describe("PBSApi", function(){
+describe("PBSTvSchedules API", function(){
     this.timeout(10000); // The PBS API is slow.
 
     it("must be creatable", function(){
@@ -17,7 +17,8 @@ describe("PBSApi", function(){
     });
 
     it("should get a list of callsigns for zip " + testzip_good + "  (async)", function(finished){
-        PBSApi.get_callsigns_by_zip_async(testzip_good, function(err, results){
+        var min_confidence = 0;
+        PBSApi.get_callsigns_by_zip_async(testzip_good, min_confidence, function(err, results){
             results.must.be.an.array();
             results.length.must.equal(3);
             finished();
@@ -25,7 +26,8 @@ describe("PBSApi", function(){
     });
 
     it("should get a list of callsigns for zip " + testzip_good + " (promises)", function(finished){
-        PBSApi.get_callsigns_by_zip(testzip_good)
+        var min_confidence = 0;
+        PBSApi.get_callsigns_by_zip(testzip_good, min_confidence)
         .then(function(results){
             results.must.be.an.array();
             results.length.must.equal(3);
@@ -33,6 +35,28 @@ describe("PBSApi", function(){
         })
         .done();
     });
+
+    it("should get no list of callsigns for zip " + testzip_good + " when min_confidence is 101 (async)", function(finished){
+        var min_confidence = 101;
+        PBSApi.get_callsigns_by_zip_async(testzip_good, min_confidence, function(err, results){
+            results.must.be.an.array();
+            results.length.must.equal(0);
+            finished();
+        });
+    });
+
+    it("should get no list of callsigns for zip " + testzip_good + " when min_confidence is 101 (promises)", function(finished){
+        var min_confidence = 101;
+        PBSApi.get_callsigns_by_zip(testzip_good, min_confidence)
+        .then(function(results){
+            results.must.be.an.array();
+            results.length.must.equal(0);
+            finished();
+        })
+        .done();
+    });
+
+
 
     var test_ip = '8.8.8.8',
         test_zip = '94040';
