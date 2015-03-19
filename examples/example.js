@@ -27,7 +27,7 @@ pbsAPI.get_upcoming_by_callsign_program_id('kqed', show_id)
 .then(function(results){
     pbsAPI.logger.info("Title for first airing episode of show_id " + show_id, results.upcoming_episodes[0].episode_title);
 })
-.fail(function(err){
+.catch(function(err){
     pbsAPI.logger.error(err);
 })
 .done();
@@ -38,7 +38,7 @@ pbsAPI.get_zip_from_ip(ip)
 .then(function(results){
     pbsAPI.logger.info("Zip code for ip " + ip + " is", results.$items[0].zipcode);
 })
-.fail(function(err){
+.catch(function(err){
     pbsAPI.logger.error(err);
 })
 .done();

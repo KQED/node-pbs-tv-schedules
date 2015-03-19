@@ -72,7 +72,7 @@ pbsAPI.get_zip_from_ip(ip)
 .then(function(results){
     pbsAPI.logger.info("Zip code for ip " + ip + " is", results.$items[0].zipcode);
 })
-.fail(function(err){
+.catch(function(err){
     pbsAPI.logger.error(err);
 })
 .done();
