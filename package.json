@@ -1,6 +1,6 @@
 {
   "name": "node-pbs-tv-schedules",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Node module implementing the PBS TV Schedules V2 and Locator APIs",
   "main": "index.js",
   "repository": "https://github.com/KQED/node-pbs-tv-schedules",
