@@ -1,5 +1,6 @@
 var demand  = require('must'),
     assert  = require('assert'),
+    moment  = require('moment'),
     PBSTvSchedules = require('./../');
 
 var testzip_good = 94110,
@@ -130,6 +131,37 @@ describe("PBSTvSchedules API", function(){
             })
             .done();
         });
+
+        it("should get day's worth of schedule for a date and callsign (async)", function(finished){
+            var datestring = moment().format("YYYYMMDD");
+            var callsign = "KQED",
+                lc_callsign = callsign.toLowerCase();
+            PBSApi.get_day_schedule_for_callsign_date_async(lc_callsign, datestring, function (err, results){
+                results.must.be.an.object();
+                results.callsign.must.equal(lc_callsign);
+                results.datestring.must.equal(datestring);
+                results.feeds.must.be.an.array();
+                results.feeds[0].listings.must.be.an.array();
+                finished();
+            });
+        });
+
+        it("should get day's worth of schedule for a date and callsign (promises)", function(finished){
+            var datestring = moment().format("YYYYMMDD");
+            var callsign = "KQED",
+                lc_callsign = callsign.toLowerCase();
+            PBSApi.get_day_schedule_for_callsign_date(lc_callsign, datestring)
+            .then(function(results){
+                results.must.be.an.object();
+                results.callsign.must.equal(lc_callsign);
+                results.datestring.must.equal(datestring);
+                results.feeds.must.be.an.array();
+                results.feeds[0].listings.must.be.an.array();
+                finished();
+            })
+            .done();
+        });
+
 
     } else {
         it("Can't run some tests because of lack of api_key", function (finished) {

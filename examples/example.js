@@ -1,4 +1,5 @@
 var PBSTvSchedules = require('../'),
+    moment = require('moment'),
     options = {};
 
 options.api_key =  process.env.PBS_TV_SCHEDULES_API_KEY || null;
@@ -39,6 +40,18 @@ pbsAPI.get_zip_from_ip(ip)
     pbsAPI.logger.info("Zip code for ip " + ip + " is", results.$items[0].zipcode);
 })
 .catch(function(err){
+    pbsAPI.logger.error(err);
+})
+.done();
+
+// Get day's listing for KQED
+var datestamp = moment().format('YYYYMMDD'),
+    callsign = 'kqed';
+pbsAPI.get_day_schedule_for_callsign_date(callsign,datestamp)
+.then(function(results){
+    pbsAPI.logger.info("Found " + results.feeds.length + " items");
+})
+.catch(function (err) {
     pbsAPI.logger.error(err);
 })
 .done();
