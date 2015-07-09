@@ -21,14 +21,14 @@
   "author": "Kip Gebhardt <kgebhardt@kqed.org>",
   "license": "MIT",
   "dependencies": {
-    "bluebird": "^2.9.13",
-    "bunyan": "^1.3.4",
-    "moment": "^2.10.0",
+    "bluebird": "^2.9.33",
+    "bunyan": "^1.4.0",
+    "moment": "^2.10.3",
     "nodeify": "^1.0.0",
-    "request": "^2.53.0"
+    "request": "^2.58.0"
   },
   "devDependencies": {
     "must": "^0.12.0",
-    "mocha": "^2.1.0"
+    "mocha": "^2.2.5"
   }
 }

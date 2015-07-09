@@ -162,6 +162,24 @@ describe("PBSTvSchedules API", function(){
             .done();
         });
 
+        it("should request against a custom url w/o API key (promises)", function(finished){
+            var zipcode = 94110,
+                callsign = "KQED",
+                lc_callsign = callsign.toLowerCase();
+                options = {
+                    method : 'GET',
+                    url    : PBSApi.base_url + 'tvss/' + callsign + '/channels/zip/' + zipcode
+                };
+
+            PBSApi.standard_http_request(options)
+            .then(function (results){
+                results.must.be.an.object();
+                results.headends.must.be.an.array();
+                results.headends[0].feeds.must.be.an.array();
+                finished();
+            })
+            .done();
+        });
 
     } else {
         it("Can't run some tests because of lack of api_key", function (finished) {

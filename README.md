@@ -22,16 +22,31 @@ $ cd node-pbs-tv-schedules
 $ npm install
 ```
 
-## Tests
-Some tests require an api_key.
+## Usage
+See `examples`
+
+### Custom Request
+See `examples/custom_request.js` for example of how to craft the PBS TV Schedule Method url.
 ```
 $ export PBS_TV_SCHEDULES_API_KEY='YOUR_KEY'
-$ cd node-pbs-tv-schedules
-$ npm test
+$ cd examples
+$ node custom_request.js
+[2015-07-09T22:53:00.071Z]  INFO: node-pbs-tv-schedules/79425 on kip-mbp.kqed.org:
+    Channels { headends:
+       [ { feeds: [Object], name: 'AT&T U-verse - San Francisco' },
+         { feeds: [Object], name: 'Astound Broadband - San Francisco' },
+         { feeds: [Object], name: 'Broadcast TV - Oakland' },
+         { feeds: [Object], name: 'Broadcast TV - San Fran-Oak-Sj' },
+         { feeds: [Object], name: 'Comcast - San Francisco' },
+         { feeds: [Object], name: 'DirecTV - San Francisco-Oak-SJ' },
+         { feeds: [Object], name: 'Dish Network - San Francisco-Oak-SJ' },
+         { feeds: [Object],
+           name: 'TVMAX - Bernal Heights - San Francisco' } ] }
+...
 ```
-
-## Usage
-See `examples/example.js`
+### Built In Functions
+There are some built in functions for common actions.
+See `examples/examples.js`
 ```
 $ export PBS_TV_SCHEDULES_API_KEY='YOUR_KEY'
 $ cd node-pbs-tv-schedules
@@ -100,4 +115,12 @@ pbsAPI.get_day_schedule_for_callsign_date(callsign,datestamp)
     pbsAPI.logger.error(err);
 })
 .done();
+```
+
+## Tests
+Some tests require an api_key.
+```
+$ export PBS_TV_SCHEDULES_API_KEY='YOUR_KEY'
+$ cd node-pbs-tv-schedules
+$ npm test
 ```
