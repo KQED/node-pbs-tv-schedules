@@ -22,11 +22,22 @@ pbsAPI.get_callsigns_by_zip_async(zip, function(err, stations){
     logger.info("get_callsigns_by_zip_async", stations);
 });
 
-// Get upcomings on KQED for show_id
-var show_id = 3190;
-pbsAPI.get_upcoming_by_callsign_program_id('kqed', show_id)
+// Get upcomings on KQED for program_id
+var program_id = 3190;
+pbsAPI.get_upcoming_by_callsign_program_id('kqed', program_id)
 .then(function(results){
-    pbsAPI.logger.info("Title for first airing episode of show_id " + show_id, results.upcoming_episodes[0].episode_title);
+    pbsAPI.logger.info("Title for first airing episode of program_id " + program_id, results.upcoming_episodes[0].episode_title);
+})
+.catch(function(err){
+    pbsAPI.logger.error(err);
+})
+.done();
+
+// Get upcomings on KQED for show_id
+var show_id = episode_44926;
+pbsAPI.get_upcoming_by_callsign_show_id('kqed', show_id)
+.then(function(results){
+    pbsAPI.logger.info("Title for episode of show_id " + show_id, results.episode_title);
 })
 .catch(function(err){
     pbsAPI.logger.error(err);
